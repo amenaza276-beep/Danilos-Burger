@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Danilo's Delicious - Hamburguesas</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', Arial, sans-serif; }
+    body {
+      color: #fff;
+      background: url('fondo-danilos.png') no-repeat center center fixed;
+      background-size: cover;
+    }
+    .overlay {
+      background: rgba(0,0,0,0.45);
+      min-height: 100vh;
+    }
+    header {
+      text-align: center;
+      padding: 80px 20px;
+    }
+    header h1 {
+      font-size: 3rem;
+      color: #ffb703;
+      text-shadow: 0 4px 10px #000;
+    }
+    header p {
+      margin-top: 15px;
+      font-size: 1.2rem;
+    }
+    section {
+      max-width: 1100px;
+      margin: auto;
+      padding: 60px 20px;
+    }
+    .menu {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 25px;
+    }
+    .item {
+      background: rgba(0,0,0,0.7);
+      border-radius: 18px;
+      padding: 25px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.6);
+    }
+    .item h3 {
+      color: #ffb703;
+      margin-bottom: 10px;
+    }
+    .btn {
+      display: inline-block;
+      margin-top: 15px;
+      padding: 12px 22px;
+      background: #d62828;
+      color: #fff;
+      border-radius: 30px;
+      text-decoration: none;
+      font-weight: bold;
+    }
+    .btn:hover { background: #a4161a; }
+    footer {
+      text-align: center;
+      padding: 30px;
+      background: rgba(0,0,0,0.85);
+      color: #ccc;
+    }
+  </style>
+</head>
+<body>
+  <div class="overlay">
+    <header>
+      <h1>Danilo's Delicious</h1>
+      <p>Hamburguesas, comida rápida y puro sabor 🔥</p>
+      <a class="btn" href="#menu">Ver menú</a>
+    </header>
+
+    <section id="menu">
+      <h2 style="text-align:center; margin-bottom:40px;">Nuestro Menú</h2>
+      <div class="menu">
+        <div class="item product" data-name="Hamburguesa Clásica" data-desc="Carne jugosa 100% res, queso derretido, lechuga y tomate en pan artesanal." data-img="producto1.jpg">
+          <h3>Hamburguesa Clásica</h3>
+          <p>Click para ver detalles</p>
+        </div>
+        <div class="item product" data-name="Hamburguesa Doble" data-desc="Doble carne, doble queso, más sabor y tamaño." data-img="producto2.jpg">
+          <h3>Hamburguesa Doble</h3>
+          <p>Click para ver detalles</p>
+        </div>
+        <div class="item product" data-name="Salchipapas" data-desc="Papas crocantes con salchicha premium y salsas." data-img="producto3.jpg">
+          <h3>Salchipapas</h3>
+          <p>Click para ver detalles</p>
+        </div>
+      </div>
+    </section>
+
+    <div id="modal" style="display:none; position:fixed; inset:0; background:rgba(0,0,0,.8); justify-content:center; align-items:center; z-index:999;">
+      <div style="background:#020617; padding:25px; border-radius:16px; max-width:420px; width:90%; text-align:center;">
+        <h3 id="m-title" style="color:#ffb703"></h3>
+        <img id="m-img" src="" alt="producto" style="width:100%; border-radius:12px; margin:15px 0;">
+        <p id="m-desc"></p>
+        <a class="btn" href="https://wa.me/51910837723" target="_blank">Pedir por WhatsApp</a>
+        <br><br>
+        <button class="btn" onclick="closeModal()">Cerrar</button>
+      </div>
+    </div>
+
+    <script>
+      const products = document.querySelectorAll('.product');
+      const modal = document.getElementById('modal');
+      const mTitle = document.getElementById('m-title');
+      const mDesc = document.getElementById('m-desc');
+      const mImg = document.getElementById('m-img');
+
+      products.forEach(p => {
+        p.addEventListener('click', () => {
+          mTitle.textContent = p.dataset.name;
+          mDesc.textContent = p.dataset.desc;
+          mImg.src = p.dataset.img;
+          modal.style.display = 'flex';
+        });
+      });
+
+      function closeModal(){ modal.style.display = 'none'; }
+    </script>
+
+    <section id="pedidos">
+      <h2 style="text-align:center; margin-bottom:40px;">Pedidos Rápidos</h2>
+      <div class="menu">
+        <div class="item">
+          <h3>📲 WhatsApp</h3>
+          <p>Haz tu pedido directo por WhatsApp y te respondemos al instante.</p>
+          <a class="btn" href="https://wa.me/51910837723" target="_blank">Pedir por WhatsApp</a>
+        </div>
+        <div class="item">
+          <h3>🛵 Delivery</h3>
+          <p>Entregas rápidas y seguras en tu zona.</p>
+        </div>
+        <div class="item">
+          <h3>🏪 Recojo en local</h3>
+          <p>Ordena online y recoge sin hacer cola.</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="carta">
+      <h2 style="text-align:center; margin-bottom:40px;">Nuestra Carta</h2>
+      <div class="menu">
+        <div class="item"><h3>🍔 Clásica</h3><p>S/ 12.00</p></div>
+        <div class="item"><h3>🍔 Doble Queso</h3><p>S/ 18.00</p></div>
+        <div class="item"><h3>🍟 Salchipapas</h3><p>S/ 10.00</p></div>
+        <div class="item"><h3>🌭 Hot Dog</h3><p>S/ 8.00</p></div>
+        <div class="item"><h3>🥤 Gaseosas</h3><p>S/ 4.00</p></div>
+      </div>
+    </section>
+
+    <section id="redes">
+      <h2 style="text-align:center; margin-bottom:40px;">Síguenos</h2>
+      <div class="menu">
+        <div class="item">
+          <h3>📸 Instagram</h3>
+          <a class="btn" href="#">@danilosdelicious</a>
+        </div>
+        <div class="item">
+          <h3>📘 Facebook</h3>
+          <a class="btn" href="#">Danilo's Delicious</a>
+        </div>
+        <div class="item">
+          <h3>🎵 TikTok</h3>
+          <a class="btn" href="#">@danilosburger</a>
+        </div>
+      </div>
+    </section>
+
+    <section id="extra">
+      <h2 style="text-align:center; margin-bottom:40px;">Experiencia Danilo's 🔥</h2>
+      <div class="menu">
+        <div class="item"><h3>⭐ Opiniones reales</h3><p>Clientes felices todos los días.</p></div>
+        <div class="item"><h3>🎁 Promos semanales</h3><p>Combos y descuentos exclusivos.</p></div>
+        <div class="item"><h3>⏱️ Atención rápida</h3><p>Porque sabemos que tienes hambre.</p></div>
+      </div>
+    </section>
+
+    <footer>
+      <p>© 2026 Danilo's Delicious | Av. 2 de Octubre con Próceres de Huandoy | Atención: 6:00 pm – 12:00 am</p>
+    </footer>
+  </div>
+</body>
+</html>
